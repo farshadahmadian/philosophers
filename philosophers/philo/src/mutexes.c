@@ -6,7 +6,7 @@
 /*   By: fahmadia <fahmadia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:48:13 by fahmadia          #+#    #+#             */
-/*   Updated: 2023/09/24 08:43:23 by fahmadia         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:25:59 by fahmadia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	create_all_mutexes(t_data *data)
 		return (FALSE);
 	if (!init_mutex(data->mutex_time, 1))
 		return (FALSE);
-	if (!init_mutex(data->mutex_num_eat, 1))
+	if (!init_mutex(data->mutex_num_eat, data->philos_num))
 		return (FALSE);
-	if (!init_mutex(data->mutex_last_eat, 1))
+	if (!init_mutex(data->mutex_last_eat, data->philos_num))
 		return (FALSE);
 	if (!init_mutex(data->mutex_finish, 1))
 		return (FALSE);
@@ -69,9 +69,9 @@ int	destroy_all_mutexes(t_data data)
 		return (FALSE);
 	if (!destroy_mutex(data.mutex_time, 1))
 		return (FALSE);
-	if (!destroy_mutex(data.mutex_num_eat, 1))
+	if (!destroy_mutex(data.mutex_num_eat, data.philos_num))
 		return (FALSE);
-	if (!destroy_mutex(data.mutex_last_eat, 1))
+	if (!destroy_mutex(data.mutex_last_eat, data.philos_num))
 		return (FALSE);
 	if (!destroy_mutex(data.mutex_finish, 1))
 		return (FALSE);

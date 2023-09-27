@@ -6,7 +6,7 @@
 /*   By: fahmadia <fahmadia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:41:25 by fahmadia          #+#    #+#             */
-/*   Updated: 2023/09/24 08:35:32 by fahmadia         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:23:40 by fahmadia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	do_action(t_philo *philo, long int *time, t_action action)
 	else if (action == EAT)
 	{
 		print_message(philo, *time, "is eating");
-		pthread_mutex_lock(philo->data->mutex_num_eat);
+		pthread_mutex_lock(philo->data->mutex_num_eat + philo->philo_index);
 		philo->num_eat++;
-		pthread_mutex_unlock(philo->data->mutex_num_eat);
-		pthread_mutex_lock(philo->data->mutex_last_eat);
+		pthread_mutex_unlock(philo->data->mutex_num_eat + philo->philo_index);
+		pthread_mutex_lock(philo->data->mutex_last_eat + philo->philo_index);
 		philo->last_eat_time = *time;
-		pthread_mutex_unlock(philo->data->mutex_last_eat);
+		pthread_mutex_unlock(philo->data->mutex_last_eat + philo->philo_index);
 	}
 	else if (action == SLEEP)
 		print_message(philo, *time, "is sleeping");

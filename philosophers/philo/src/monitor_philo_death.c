@@ -6,7 +6,7 @@
 /*   By: fahmadia <fahmadia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 16:16:31 by fahmadia          #+#    #+#             */
-/*   Updated: 2023/09/24 08:41:49 by fahmadia         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:24:57 by fahmadia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ bool	is_a_philo_dead(t_data *data, int i)
 
 	time_to_die = data->time_to_die;
 	current_relative_time = get_relative_time(data);
-	pthread_mutex_lock(data->mutex_last_eat);
+	pthread_mutex_lock(data->mutex_last_eat + i);
 	if (current_relative_time - (data->philos + i)->last_eat_time > time_to_die)
 	{
-		pthread_mutex_unlock(data->mutex_last_eat);
+		pthread_mutex_unlock(data->mutex_last_eat + i);
 		print_message((data->philos + i), get_relative_time(data), "died");
 		raise_is_finished_flag(data);
 		return (TRUE);
 	}
-	pthread_mutex_unlock(data->mutex_last_eat);
+	pthread_mutex_unlock(data->mutex_last_eat + i);
 	return (FALSE);
 }
 
