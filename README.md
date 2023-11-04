@@ -7,7 +7,7 @@ Project Philosophers is about multiple philosophers sitting around a circle tabl
 
 Any process creates a copy of all the variables, so it has its own variables independently, which means changing the value of a variable in one process does not affect the value of that variable in another process. In threads, all the threads share the same memory. So, if we create a thread, the main thread and the newly created thread share the same memory, meaning changing the value of a variable in one thread changes the value of that variable in the other thread too.
 
-Furthermore, processes execute the code beginning from the `fork()` call all the way to `exit()` or `return()` from the `main()` function, but threads only execute the function passed as the third argument of the function `pthread_create()`
+Furthermore, processes execute the code beginning from the `fork()` call all the way to `return()` from the `main()` function or `exit()`, but threads only execute the function passed as the third argument of the function `pthread_create()`, so the processes execute the same code, but the child threads execute their own routine function.
 
 Also, each process has its own Process ID (pid), but all the threads execute their function inside the process that created them, so it means they have the same pid as the process in which they were created. So, each process can create multiple threads, but a thread cannot create a new process.
 
